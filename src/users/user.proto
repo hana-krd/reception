@@ -58,7 +58,7 @@ message SeachUserRequest {
 }
 
 message SearchUserResponse{
-  repeated UserResponse users = 1;
+  repeated UserResponse items = 1;
 }
 
 message UserResponse {

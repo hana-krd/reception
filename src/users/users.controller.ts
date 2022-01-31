@@ -1,5 +1,5 @@
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { CreateDoctorDto } from './dto/request/create-doctor.dto';
 import { CreateUserDto } from './dto/request/create-user.dto';
@@ -12,9 +12,15 @@ export class UsersController {
   
   constructor(private userService: UsersService) { }
 
+  @UsePipes(ValidationPipe)
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto>{
     return await this.userService.create(createUserDto);
+  }
+
+  @Get()
+  async findAll(@Query() filters: UserFilterDto): Promise<UserResponseDto[]>{
+    return await this.userService.findAll(filters);
   }
 
 }

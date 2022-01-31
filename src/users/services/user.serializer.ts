@@ -5,10 +5,12 @@ import { User } from "../schemas/user.schema";
 
 @Injectable()
 export class UserSerializer implements BaseSerializer<User, UserResponseDto> {
+    
     serialize(inData: User): UserResponseDto {
         return inData;
     }
-    serializeList(inData: User[]): UserResponseDto[] {
-        return inData.map(user => this.serialize(user));
-    } 
+
+    serializeList(inData: User[]): { items: UserResponseDto[]; } {
+        return { items: inData.map(user => this.serialize(user)) };
+    }
 }
