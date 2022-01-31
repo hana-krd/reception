@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc Create(CreateUser) returns (UserResponse);
+  rpc FindAll (SeachUserRequest) returns (SearchUserResponse);
+}
+
+service DoctorService{
+  rpc Create(CreateDoctor)returns(UserResponse);
+}
+
+message PhoneNumber{
+  string countryCode = 1;
+  string number = 2;
+}
+
+message Nationality{
+  string country = 1;
+  string nationalCode = 2;
+  optional string passportId = 3;
+}
+
+message Paginate{
+  optional int32 page = 3 [default = 0];
+  optional int32 count = 4 [default = 10];
+}
+
+message CreateUser{
+
+  enum Gender{
+    UNKNOWN = 0;
+    MALE = 1;
+    FEMALE = 2;
+  }
+
+  string name = 1;
+  PhoneNumber mobile = 2;
+  Nationality nationality = 3;
+  optional Gender gender = 4 [default = UNKNOWN];
+  optional string birthday = 5;
+}
+
+message DoctorExpertise{
+  string expertiseId = 1;
+}
+
+message CreateDoctor{
+  string userId = 1;
+  DoctorExpertise expertise = 2;
+}
+
+message SeachUserRequest {
+  string name = 1;
+  PhoneNumber mobile = 2;
+  optional Paginate paginate = 3;
+}
+
+message SearchUserResponse{
+  repeated UserResponse users = 1;
+}
+
+message UserResponse {
+
+  enum Gender{
+    UNKNOWN = 0;
+    MALE = 1;
+    FEMALE = 2;
+  }
+
+  string id = 1;
+  string name = 2;
+  PhoneNumber mobile = 3;
+  Nationality nationality = 4;
+  optional Gender gender = 5 [default = UNKNOWN];
+  optional string birthday = 6;
+  optional DoctorExpertise expertise = 7;
+}
