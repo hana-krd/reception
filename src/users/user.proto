@@ -28,17 +28,10 @@ message Paginate{
 }
 
 message CreateUser{
-
-  enum Gender{
-    UNKNOWN = 0;
-    MALE = 1;
-    FEMALE = 2;
-  }
-
   string name = 1;
   PhoneNumber mobile = 2;
   Nationality nationality = 3;
-  optional Gender gender = 4 [default = UNKNOWN];
+  optional string gender = 4;
   optional string birthday = 5;
 }
 
@@ -52,9 +45,10 @@ message CreateDoctor{
 }
 
 message SeachUserRequest {
-  string name = 1;
-  PhoneNumber mobile = 2;
-  optional Paginate paginate = 3;
+  optional string name = 1;
+  optional PhoneNumber mobile = 2;
+  optional string gender = 3 ;
+  optional Paginate paginate = 4;
 }
 
 message SearchUserResponse{
@@ -62,18 +56,11 @@ message SearchUserResponse{
 }
 
 message UserResponse {
-
-  enum Gender{
-    UNKNOWN = 0;
-    MALE = 1;
-    FEMALE = 2;
-  }
-
-  string id = 1;
+  string _id = 1;
   string name = 2;
   PhoneNumber mobile = 3;
   Nationality nationality = 4;
-  optional Gender gender = 5 [default = UNKNOWN];
+  optional string gender = 5 ;
   optional string birthday = 6;
   optional DoctorExpertise expertise = 7;
 }

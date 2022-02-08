@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { BaseSerializer } from "../../shared/interfaces/base-serializer.interface";
+import { BaseSerializer } from "../../common/interfaces/base-serializer.interface";
 import { UserResponseDto } from "../dto/response/user-response.dto";
 import { User } from "../schemas/user.schema";
 

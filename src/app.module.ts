@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AllHttpExceptionsFilter } from './common';
 import { mongoOption } from './config/mongodb.options';
 import { UsersModule } from './users/users.module';
 
@@ -11,6 +12,6 @@ import { UsersModule } from './users/users.module';
     UsersModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AllHttpExceptionsFilter],
 })
 export class AppModule {}
